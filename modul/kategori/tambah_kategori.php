@@ -66,13 +66,31 @@ if(empty($_SESSION['username']) and empty($_SESSION['password'])){
     </form>
     </div>
     </nav>
-        
-        <div class="mycontainer">
-        <div class="jumbotron">
-            <h1 class="display">Woy, <?= $_SESSION['namaadmin'] ?> &nbsp;Selamat Datang</h1>
-            <p class="textnbsp">Semangat!</p>
-        </div>
-    </div>
+    
+    <form method="POST">
+      <div class="group1">
+      <label for="formGroupExampleInput">ID Kategori</label>
+      <input type="text" name="id_kategori" class="form-control" placeholder="Ex. 15">
+      <label for="formGroupExampleInput">Nama Kategori</label>
+      <input type="text" name="nama_kategori" class="form-control" placeholder="Ex. UMKM Digital">
+      <br></br>
+      <input type="submit" name="submit" class="btn btn-primary" value="Simpan">
+    </form>
+    
+    <?php
+
+    require_once '../../koneksi.php';
+
+    if(isset($_POST['submit'])){
+      $id_k = $_POST['id_kategori'];
+      $nama_k = $_POST['nama_kategori'];
+
+      mysqli_query($koneksi, "insert into tbkategori_3183111046 values ('$id_k','$nama_k')");
+      header("location:kategori.php");
+
+    }
+
+    ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

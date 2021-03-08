@@ -27,6 +27,7 @@ if(empty($_SESSION['username']) and empty($_SESSION['password'])){
      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
      crossorigin="anonymous">
      <link rel="stylesheet" href="css2/style.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 </head>
 <body>
     <div class="container">
@@ -66,17 +67,55 @@ if(empty($_SESSION['username']) and empty($_SESSION['password'])){
     </form>
     </div>
     </nav>
-        
-        <div class="mycontainer">
-        <div class="jumbotron">
-            <h1 class="display">Woy, <?= $_SESSION['namaadmin'] ?> &nbsp;Selamat Datang</h1>
-            <p class="textnbsp">Semangat!</p>
-        </div>
-    </div>
+    <br/>    
+    <a class="btn btn-primary" href="tambah_kategori.php" role="button">[+]Tambah Data Kategori</a>   
+    <br></br>
+    <table class="table mt-4">
+    <thead class="table-dark">
+      <tr>
+        <td>No</td>
+        <td>Nama Kategori</td>
+        <td>Aksi</td>
+      </tr>
+    </thead>
+    <tbody>
+    
+    <?php
+
+    require_once "../../koneksi.php";
+
+    $query = mysqli_query($koneksi, "SELECT * FROM tbkategori_3183111046");
+    $no = 1;
+    while($get = mysqli_fetch_array($query)){
+      ?>
+
+    <tr>
+      <th><?= $no++ ?></th>
+      <td><?= $get['nama_kategori'] ?></td>
+      <td><a class="btn btn-success" href="edit_kategori.php?id=<?= $get['id_kategori'] ?>" role="button">Edit</a>
+      <a class="btn btn-danger" href="hapus_kategori.php?id=<?= $get['id_kategori'] ?>" role="button" onclick="return confirm('Yakin Akan Dihapus ?')">Hapus</a>
+      </td>
+    </tr>
+
+    <?php  
+    }
+    ?>
+    
+
+    </tbody>
+    </table>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+<script>
+$(document).ready( function () {
+    $('#tabelUMKM').DataTable();
+} );
+</script>
+
 </body>
 
 </html>
